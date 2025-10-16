@@ -2,7 +2,7 @@
 # Project Overview
 This project is an expansion of research intially published in the 2024 IEEE TrustCom paper "Investigating Patterns of Adversarial Techniques for Cyberattack Forensics". The research detailed a graph-based technique identifying adversarial attack patterns by analyzing co-occurrence patterns found in the MITRE ATT&CK framework. This was specifically designed for Windows event logs and successfully achieved high accuracy in detecting data leakage and unauthorized access attacks.
 
-The proposed extension evaluates the graph-guided approach robustness and performance by incorporating Linux and cloud telemtry, and benchmarking its behavior under streaming SIEM workloads.
+The proposed extension evaluates the graph-guided approach robustness and performance by incorporating Linux and cloud telemetry, and benchmarking its behavior under streaming SIEM workloads.
 # Research Objectives
 1. Does the pattern-based detector hold up on Linux and cloud (e.g, CloudTrail/Azure) telemetry without changing the core method?
 2. What are the time-to-detection and throughput under streaming SIEM workloads?

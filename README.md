@@ -1,4 +1,4 @@
-# Graph-Guided Adversarial Technique Detection Across Platforms
+# Investigating Adversarial Patterns in Linux Environments Using Weighted Knowledge Graphs
 # Project Overview
 This project is an expansion of research intially published in the 2024 IEEE TrustCom paper "Investigating Patterns of Adversarial Techniques for Cyberattack Forensics". The research detailed a graph-based technique identifying adversarial attack patterns by analyzing co-occurrence patterns found in the MITRE ATT&CK framework. This was specifically designed for Windows event logs and successfully achieved high accuracy in detecting data leakage and unauthorized access attacks.
 

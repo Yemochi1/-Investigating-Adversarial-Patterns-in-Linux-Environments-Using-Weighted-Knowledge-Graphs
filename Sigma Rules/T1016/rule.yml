@@ -1,0 +1,35 @@
+title: Advanced Network Tools by Victim User
+auto_generated_id: d2e1c3a4-b567-8901-2345-f67890abcde1
+status: experimental
+description: >-
+    Detects execution of advanced network discovery tools like `route`, `netstat`,
+    `arp`, or `resolvectl` by a specific user, which may indicate deeper
+    reconnaissance or lateral movement preparation.
+author: Jurema & Yemi
+date: 2025/10/21
+references:
+    - https://attack.mitre.org/techniques/T1016/
+logsource:
+    product: linux
+    service: auditd
+    
+    selection_process:
+        process.executable:
+            - '/usr/sbin/route'
+            - '/usr/bin/netstat'
+            - '/usr/sbin/arp'
+            - '/usr/bin/resolvectl'
+    
+    selection_user:
+        auditd.log.AUID: "victim"
+        
+    condition: selection_process and selection_user
+falsepositives:
+    - Network troubleshooting
+    - This rule is highly specific to the user 'victim' and will not fire
+      for other users. It must be tuned for the specific environment.
+level: medium
+tags:
+    - attack.discovery
+    - attack.t1016
+    - linux

@@ -1,0 +1,32 @@
+title: Basic Recon Command Execution
+auto_generated_id: f3a1b2c4-d567-890e-1f23-456g78h90i1j
+status: experimental
+description: Detects common recon commands executed by a non-root user.
+author: Jurema & Yemi
+date: 2025/10/21
+references:
+    - https://attack.mitre.org/techniques/T1082
+logsource:
+    product: linux
+    service: auditd
+    
+    selection_process:
+        process.executable:
+            - '/usr/bin/whoami'
+            - '/usr/bin/id'
+            - '/usr/bin/uname'
+            - '/usr/bin/pwd'
+    
+    selection_user:
+        auditd.log.AUID: "victim"
+        
+    condition: selection_process and selection_user
+falsepositives:
+    - Legitimate execution of basic commands by the monitored user.
+    - This rule is highly specific to the user 'victim' and must be tuned 
+      for other users or environments.
+level: low
+tags:
+    - attack.execution
+    - attack.t1082
+    - linux

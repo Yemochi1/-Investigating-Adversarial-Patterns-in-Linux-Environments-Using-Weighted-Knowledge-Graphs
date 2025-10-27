@@ -1,0 +1,21 @@
+# Ignore all CSV files in the Data directory
+Data/*.csv
+
+# ---
+!Data/README.md
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore Python virtual environment folders
+.venv/
+venv/
+venv.*
+
+# Ignore Jupyter Notebook checkpoint files
+.ipynb_checkpoints/
+
+# Ignore common IDE/editor configuration folders
+.vscode/
+.idea/

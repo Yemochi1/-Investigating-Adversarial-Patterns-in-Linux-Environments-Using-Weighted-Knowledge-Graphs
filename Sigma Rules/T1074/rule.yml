@@ -25,7 +25,7 @@ logsource:
     condition: selection 
 falsepositives:
     - Legitimate use of archiving tools by the monitored user (e.g., compressing log files, creating backups).
-    - Requires tuning based on expected user behavior, such as filtering for specific users (in this case `auditd.log.AUID: "victim"`)
+    - Requires tuning based on expected user behavior, such as filtering for specific users.
 level: medium
 tags:
     - attack.collection

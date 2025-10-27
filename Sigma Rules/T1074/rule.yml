@@ -1,0 +1,33 @@
+title: Archive Utility Execution by Victim User
+auto_gen_id: 5b6c3a8e-2f1d-4a1b-9e4a-1f6b5b9e0f3d
+status: experimental
+description: >-
+    Detects a user executing common archive utilities (`tar`, `zip`, `gzip`).
+    While these tools have legitimate uses, their execution by certain users 
+    might indicate data staging activities in preparation for exfiltration.
+author: Jurema & Yemi
+date: 2025/10/22
+references:
+    - https://attack.mitre.org/techniques/T1074/
+logsource:
+    product: linux
+    service: auditd
+    
+    selection:
+        process.executable:
+            - '/usr/bin/tar'
+            - '/usr/bin/zip'
+            - '/usr/bin/gzip'
+    
+     user:
+         auditd.log.AUID: "victim" 
+        
+    condition: selection 
+falsepositives:
+    - Legitimate use of archiving tools by the monitored user (e.g., compressing log files, creating backups).
+    - Requires tuning based on expected user behavior, such as filtering for specific users (in this case `auditd.log.AUID: "victim"`)
+level: medium
+tags:
+    - attack.collection
+    - attack.t1074
+    - linux

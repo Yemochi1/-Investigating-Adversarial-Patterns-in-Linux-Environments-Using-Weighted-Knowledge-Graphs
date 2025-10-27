@@ -1,0 +1,67 @@
+title: Login Enumeration by User - Linux
+auto_generated_id: a4b3c2d1-e6f5-a4b3-c2d1-e6f5a4b3c2d1
+status: experimental
+description: >-
+    Detects execution of login enumeration tools like `w`, `who`, or `last`
+    by a specific user, which may indicate reconnaissance of active or
+    recent sessions.
+author: Jurema & Yemi
+date: 2025/10/22
+references:
+    - https://attack.mitre.org/techniques/T1087/
+logsource:
+    product: linux
+    service: auditd
+    
+    selection_process:
+        process.executable:
+            - '/usr/bin/w'
+            - '/usr/bin/who'
+            - '/usr/bin/last'
+            
+    selection_user:
+        auditd.log.AUID: "victim"
+        
+    condition: selection_process and selection_user
+falsepositives:
+    - Routine user activity checks
+    - This rule is highly specific to the user 'victim' and must be tuned
+      for other users or environments.
+level: low
+tags:
+    - attack.discovery
+    - attack.t1087
+    - linux
+
+title: Local Group Enumeration by User
+auto_generated_id: 9a2b5c1d-8e4f-4b1a-b3d9-e2f7c6a5b1d0
+status: experimental
+description: >-
+    Detects execution of 'id' or 'groups' commands by a specific user, 
+    which may indicate enumeration of local group memberships.
+author: Jurema & Yemi
+date: 2025/10/22
+references:
+    - https://attack.mitre.org/techniques/T1087
+logsource:
+    product: linux
+    service: auditd
+    
+    selection_process:
+        process.executable:
+            - '/usr/bin/id'
+            - '/usr/bin/groups'
+            
+    selection_user:
+        auditd.log.AUID: "victim"
+        
+    condition: selection_process and selection_user
+falsepositives:
+    - Legitimate user session checks
+    - This rule is highly specific to the user 'victim' and must be tuned
+      for other users or environments.
+level: low
+tags:
+    - attack.discovery
+    - attack.t1087
+    - linux
